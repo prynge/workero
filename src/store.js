@@ -4,13 +4,22 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {
+    state: {
+        navigation : [
+            {
+                code : 'home',
+                label : 'Accueil'
+            },
+            {
+                code : 'team',
+                label : 'Équipe'
+            }
+        ]
+    },
+    mutations: {
 
-  },
-  mutations: {
+    },
+    actions: {
 
-  },
-  actions: {
-
-  }
+    }
 })

@@ -1,13 +1,13 @@
 <template>
-    <div id="page-home">
-        Page accueil
+    <div id="page-activity">
+        Page activités & congés.
     </div>
 </template>
 
 <script>
 
 export default {
-    name: 'page-home',
+    name: 'page-activity',
     components: {
 
     }
@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style lang="scss">
-    #page-home {
+    #page-activity {
 
     }
 </style>

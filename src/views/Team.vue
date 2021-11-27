@@ -1,13 +1,13 @@
 <template>
-    <div id="page-home">
-        Page accueil
+    <div id="page-team">
+        Page équipe
     </div>
 </template>
 
 <script>
 
 export default {
-    name: 'page-home',
+    name: 'page-team',
     components: {
 
     }
@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style lang="scss">
-    #page-home {
+    #page-team {
 
     }
 </style>
