@@ -1,6 +1,9 @@
 <template>
     <div id="page-home">
-        Page accueil
+        Liste des projets
+        <div v-if="projectsModel.loaded">
+            {{projectsModel.data}}
+        </div>
     </div>
 </template>
 
@@ -10,6 +13,14 @@ export default {
     name: 'page-home',
     components: {
 
+    },
+    created () {
+        this.$store.dispatch('loadProjects');
+    },
+    computed : {
+        projectsModel () {
+            return this.$store.state.projects;
+        }
     }
 }
 
