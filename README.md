@@ -56,3 +56,12 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ### Target
 
 ![Target interface](https://raw.githubusercontent.com/P4Thi0ut/workero/master/preview.png)
+
+### Codes couleur
+
+| Color      | Code    |
+|------------|:-------:|
+| Fond       | #f2f5fa |
+| Ombre      | #e6e8eb |
+| Texte      | #1d3046 |
+| Bleu clair | #e2e9f5 |
