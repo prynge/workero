@@ -48,3 +48,11 @@ npm run build
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### Base
+
+![Base interface](https://raw.githubusercontent.com/P4Thi0ut/workero/master/preview-base.png)
+
+### Target
+
+![Target interface](https://raw.githubusercontent.com/P4Thi0ut/workero/master/preview.png)
