@@ -13,12 +13,24 @@ export default new Vuex.Store({
 
         navigation : [
             {
+                icon: 'home',
                 code : 'home',
                 label : 'Accueil'
             },
             {
+                icon: 'people_alt',
                 code : 'team',
                 label : 'Équipe'
+            },
+            {
+                icon: 'calendar_today',
+                code : 'activity',
+                label : 'Activités & congés'
+            },
+            {
+                icon: 'euro',
+                code : 'expenses',
+                label : 'Notes de frais'
             }
         ],
 

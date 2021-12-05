@@ -24,6 +24,16 @@ export default new Router({
             path: '/team',
             name: 'teamPage',
             component: TeamPage
+        },
+        {
+            path: '/activity',
+            name: 'activityPage',
+            component: ActivityPage
+        },
+        {
+            path: '/expenses',
+            name: 'expensesPage',
+            component: ExpensesPage
         }
     ]
 })

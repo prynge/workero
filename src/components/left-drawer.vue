@@ -14,14 +14,16 @@
             <v-divider></v-divider>
 
             <v-list nav dense>
+                <v-list-item-group v-model="selectedItem">
 				<v-list-item link v-for="(nav, i) in navigation" :key="i"
-					@click="gotoPage(nav.code)"
+					@click="gotoPage(nav.code,i)" active-class="texte white--text"
 				>
 					<v-list-item-icon>
-						<v-icon>home</v-icon>
+						<v-icon :class="{'white--text':selectedItem==i}" outlined>{{nav.icon}}</v-icon>
 					</v-list-item-icon>
 					<v-list-item-title>{{nav.label}}</v-list-item-title>
 				</v-list-item>
+                </v-list-item-group>
             </v-list>
         </v-navigation-drawer>
 
@@ -35,23 +37,33 @@
         },
         data () {
         	return {
-
+                selectedItem: null
         	}
         },
         beforeCreate () {
         		
         },
         created () {
-
+        	this.selectedItem = this.navigation.findIndex((element)=>{
+                return element.code == this.currentRouteCode
+            })
+        },
+        mounted () {
+            console.log(this.$router.history.current.name)
         },
         computed : {
         	navigation () {
         		return this.$store.state.navigation;
-        	}
+        	},
+            currentRouteCode () {
+                return this.$router.history.current.path.substring(1)
+            }
         },
         methods : {
-        	gotoPage (pageCode) {
+        	gotoPage (pageCode,i) {
         		this.$router.push({ name : `${pageCode}Page` });
+                this.selectedItem=i
+                console.log(i)
         	}
         }
     }
@@ -61,7 +73,9 @@
 <style lang="scss">
 
     #left-drawer {
+        .selected {
 
+        }
     }
 
 </style>
