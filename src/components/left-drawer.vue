@@ -48,9 +48,6 @@
                 return element.code == this.currentRouteCode
             })
         },
-        mounted () {
-            console.log(this.$router.history.current.name)
-        },
         computed : {
         	navigation () {
         		return this.$store.state.navigation;
@@ -62,8 +59,6 @@
         methods : {
         	gotoPage (pageCode,i) {
         		this.$router.push({ name : `${pageCode}Page` });
-                this.selectedItem=i
-                console.log(i)
         	}
         }
     }
