@@ -27,7 +27,7 @@
                         <v-list-item-title>Complétion : <b>{{project.completion}}%</b></v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
-                <avatars :avatars="avatars"></avatars>
+                <avatars :avatars="workers"></avatars>
             </v-card-text>
             <v-card-actions v-if="hover||selected">
                 <v-spacer></v-spacer>
@@ -47,32 +47,7 @@ export default {
     name: "project-card",
     data(){
         return{
-            avatars: [
-                {
-                    imgSrc: "https://cdn.vuetifyjs.com/images/john.jpg",
-                    alt:"John"
-                },
-                {
-                    imgSrc: "https://cdn.vuetifyjs.com/images/john.jpg",
-                    alt:"John"
-                },
-                {
-                    imgSrc: "https://cdn.vuetifyjs.com/images/john.jpg",
-                    alt:"John"
-                },
-                {
-                    imgSrc: "https://cdn.vuetifyjs.com/images/john.jpg",
-                    alt:"John"
-                },
-                {
-                    imgSrc: "https://cdn.vuetifyjs.com/images/john.jpg",
-                    alt:"John"
-                },
-                {
-                    imgSrc: "https://cdn.vuetifyjs.com/images/john.jpg",
-                    alt:"John"
-                },
-            ]
+            workers: []
         }
     },
     props:{
@@ -83,10 +58,59 @@ export default {
         avatars,
         Avatars
     },
-    methods: {
+    created(){
+        if (!this.employeesModel.loaded && !this.employeesModel.loading){
+            this.$store.dispatch("loadEmployees")
+        }
+        if (!this.tasksModel.loaded && this.tasksModel.loading){
+            this.$store.dispatch("loadTasks")
+        }
+        if (!this.affectationsModel.loaded && this.affectationsModel.loading){
+            this.$store.dispatch("loadAffectations")
+        }
+        if (this.loadedAll){
+            this.getAvatars()
+        }
+    },
+    watch:{
+        loadedAll: function (loadedAll){
+            if (!loadedAll){
+                return;
+            }
+            this.getAvatars()
+        }
+    },
+    computed:{
+        affectationsModel(){
+            return this.$store.state.affectations
+        },
+        employeesModel(){
+
+            return this.$store.state.employees;
+        },
+        tasksModel(){
+            return this.$store.state.tasks;
+        },
+        loadedAll(){
+            return this.affectationsModel.loaded && this.employeesModel.loaded && this.tasksModel.loaded;
+        }
+    },
+    methods:{
         clck(code, key){
-            // this.selected = !this.selected
             this.$emit('cardClicked', code, key  )
+        },
+        getAvatars(){
+            this.tasksModel.data.filter(task => {return task.project_id === this.project.id}).forEach(task=>{
+                this.affectationsModel.data.forEach(affectation => {
+                    if (affectation.task_id==task.id) {
+                        this.employeesModel.data.forEach(employee => {
+                            if (employee.id == affectation.employee_id) {
+                                this.workers.push(employee)
+                            }
+                        });
+                    }
+                });
+            })
         }
     }
 }

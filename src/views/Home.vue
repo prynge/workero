@@ -11,7 +11,7 @@
         <div class="mt-16" v-if="code!=null">
             <h1 class="texte--text"> {{code}} | <span>Priorisation des tâches</span></h1>
             <h4 class="grey--text"> Quel est le planning pour aujourd'hui ? </h4>
-            <draggable_card :detail="details"></draggable_card>
+            <draggable_card :tasks="this.tasks"></draggable_card>
         
         </div>
     </div>
@@ -69,7 +69,8 @@ export default {
                         },
                     ]
                 }
-            ]
+            ],
+            tasks:[]
         }
     },
     components: {
@@ -78,16 +79,41 @@ export default {
     },
     created () {
         this.$store.dispatch('loadProjects');
+        this.$store.dispatch('loadEmployees');
+        this.$store.dispatch('loadTasks');
+        this.$store.dispatch('loadAffectations');
     },
     computed : {
         projectsModel () {
             return this.$store.state.projects;
+        },
+        loadedTasksModel () {
+            return this.$store.state.tasks.loaded;
+        },
+        dataTasksModel () {
+            return this.$store.state.tasks.data;
         }
+    },
+    watch:{
+        loadedTasksModel: function(loadedTasksModel){
+            if (!loadedTasksModel) {
+                return
+            }
+            this.tasks = this.dataTasksModel.filter(task => {return task.project_id === this.key})
+        },
+        key:function(key){
+            if (!key || !this.loadedTasksModel) {
+                return
+            }
+            this.tasks = this.dataTasksModel.filter(task => {return task.project_id === this.key})
+        },
     },
     methods:{
         showDetails(code,key){
             this.code=code
             this.key=key
+            this.$store.dispatch('loadTasks');
+            
 
         }
     }

@@ -4,8 +4,8 @@
             <v-avatar v-for="(avatar,i) in showable" :key=i>
                 <img
                     v-if="i<3"
-                    :src="avatar.imgSrc"
-                    :alt="avatar.alt"
+                    :src="avatar.profile_picture"
+                    :alt="avatar.firstname"
                 >
             </v-avatar>
         </div>
@@ -24,11 +24,36 @@ export default {
         }
     },
     props:{
-        avatars: Array
+        avatars:Array
+
     },
     created(){
         this.nb_worker=this.avatars.length
         this.showable=this.avatars.slice(0,3)
+    },
+    watch:{
+        avatars: function(avatars){
+            this.nb_worker=avatars.length
+            this.showable=avatars.slice(0,3)
+        }
+    },
+    computed:{
+        employees(){
+            return this.$store.state.employees.data;
+        },
+        loadedEmployees(){
+            return this.$store.state.employees.loaded;
+        },
+
     }
 }
 </script>
+
+
+<style scoped lang="scss">
+    #draggable {  
+        .v-avatar {
+            margin-right: -10px;
+        }
+    }
+</style>
