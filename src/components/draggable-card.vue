@@ -33,7 +33,8 @@
 </template>
 
 <script>
-import draggable from "vuedraggable";
+import { SlickList, SlickItem } from 'vue-slicksort';
+
 import Avatars from "@/components/avatars.vue";
 export default {
     name: "draggable-card",
@@ -46,8 +47,9 @@ export default {
         tasks:Array,
     },
     components: {
-        draggable,
-        Avatars
+        Avatars,
+        SlickList,
+        SlickItem
     }, 
     created() {
         
